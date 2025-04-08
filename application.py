@@ -186,18 +186,47 @@ def app_content():
             c4.write(f"**Date max**: {date_max}")
 
         # 7) Téléchargement Excel
+                # 7) Téléchargement Excel
         st.markdown("---")
         st.markdown("### 📥 Export des données")
-        buffer_excel = io.BytesIO()
-        with pd.ExcelWriter(buffer_excel, engine="xlsxwriter") as writer:
-            df_affiche.to_excel(writer, index=False, sheet_name="Données")
-        st.download_button(
-            label="💾 Télécharger le fichier Excel",
-            data=buffer_excel.getvalue(),
-            file_name=f"centrale_{meter_id}_data.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        )
-
+        
+        try:
+            # Vérification de l'installation de xlsxwriter
+            import xlsxwriter
+    
+            # Création du fichier Excel en mémoire
+            buffer_excel = io.BytesIO()
+            
+            with pd.ExcelWriter(buffer_excel, engine="xlsxwriter") as writer:
+                df_affiche.to_excel(
+                    writer,
+                    index=False,
+                    sheet_name="Données",
+                    engine="xlsxwriter"
+                )
+                
+            # Configuration du bouton de téléchargement
+            st.download_button(
+                label="💾 Télécharger le fichier Excel",
+                data=buffer_excel.getvalue(),
+                file_name=f"centrale_{meter_id}_data.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                help="Export complet au format XLSX"
+            )
+            
+        except ImportError:
+            st.error("""
+                ⚠️ Module manquant : 
+                L'export Excel nécessite le module 'xlsxwriter'.
+                Contactez l'administrateur pour l'installation.
+            """)
+            
+        except Exception as e:
+            st.error(f"""
+                ⚠️ Erreur d'export : 
+                Une erreur est survenue lors de la génération du fichier.
+                Détails techniques : {str(e)}
+            """)
 # -------------------------------------------
 #        FONCTION PRINCIPALE STREAMLIT
 # -------------------------------------------

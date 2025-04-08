@@ -16,7 +16,7 @@ SECRET = "NzRC5xmEN8FSY6SXYtqjPk8AqS0sNR3KNV1n7MUpVRg"
 # -------------------------------------------
 VALID_USERS = {
     "OMSonnedix": "@Sonn96FR!dix", 
-    "admin": "1234",          
+    "adminSonnOM": "Ap9888FR!Sonn",          
 }
 
 # -------------------------------------------

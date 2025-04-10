@@ -12,6 +12,149 @@ TOKEN = "0wGL8vvdflGDjoK1E4KiziGxDDZsgmZ__wyocNTiotY"
 SECRET = "NzRC5xmEN8FSY6SXYtqjPk8AqS0sNR3KNV1n7MUpVRg"
 
 # -------------------------------------------
+#    MAPPING METER ID -> NOMS DES PARCS
+# -------------------------------------------
+PARCS = {
+    "39659": "Romilly-sur-Seine", 
+    "39660": "Lavansol M13 RTE", 
+    "40007": "HIS",
+    "40008": "HIS [conso]",
+    "40009": "Blanquefort",      
+    "40010": "Blanquefort [conso]",      
+    "40011": "Cabasse",
+    "40012": "Cabasse [conso]", 
+    "40013": "Castelnau",
+    "40014": "Castelnau [conso]", 
+    "40015": "Chateau-neuf-val-St-Donat - M1",
+    "40016": "Pleurtuit",
+    "40017": "Pleurtuit [conso]",
+    "40018": "Elecsol Provence",
+    "40019": "Elecsol Provence [conso]",
+    "40020": "Ginasservis",
+    "40021": "Ginasservis [conso]",
+    "40022": "Iguaçu",
+    "40023": "Iguaçu [conso]",
+    "40024": "Istres Auxiliaires",
+    "40025": "Istres Auxiliaires [conso]",
+    "40026": "Istres SM [conso]",
+    "40027": "Istres SM StMartin",
+    "40028": "Istres SS",
+    "40029": "Istres SS [conso]",
+    "40030": "M11",
+    "40031": "M11 [conso]",
+    "40032": "Lavansol I - M1",
+    "40033": "Lavansol I - M1",
+    "40034": "Lavansol M13",
+    "40035": "Lavansol M14 [conso]",
+    "40037": "Lavansol M14",
+    "40038": "Lavansol I - M23",
+    "40039": "Lavansol I - M23 [conso]",
+    "40040": "Lavansol I - M6 [conso]",
+    "40042": "Lavansol I - M6",
+    "40043": "Lavansol I - M8 A",
+    "40044": "Lavansol I - M8 A [conso]",
+    "40045": "Lavansol I - M8 B [conso]",
+    "40046": "Lavansol I - M8 B",
+    "40047": "Lavansol I - M9",
+    "40048": "Lavansol I - M9 [conso]",
+    "40049": "Quincieux [conso]",
+    "40050": "Quincieux",
+    "40051": "Revest-du-Bion",
+    "40052": "Revest-du-Bion [conso]",
+    "40053": "Romilly-sur-Seine",
+    "40054": "Solaire Uglas [conso]",
+    "40055": "Solaire Uglas",
+    "40056": "Toul 3.1",
+    "40057": "Toul 3.1 [conso]",
+    "40058": "Toul 3.2 [conso]",
+    "40059": "Toul 3.2",
+    "47377": "Lacs médocains Bourg d'Hourtin",
+    "47378": "Lacs médocains Gartiou",
+    "47379": "Lacs médocains La Redoune",
+    "47380": "Lacs médocains Bourg d'Hourtin [conso]",
+    "47381": "Lacs médocains Gartiou [conso]",
+    "47383": "Lacs médocains La redoune [conso]",
+    "48159": "CORSOLAR",
+    "48160": "Lavansol V",
+    "48161": "CORSOLAR II",
+    "48171": "CORSOLAR [conso]",
+    "48172": "Lavansol V",
+    "48173": "CORSOLAR II",
+    "53179": "Servas",
+    "54473": "Servas",
+    "54480": "Lanas 1",
+    "54481": "Lanas 1 [conso]",
+    "54482": "Lanas 2",
+    "54483": "Lanas 2 [conso]",
+    "54484": "Lanas 3",
+    "54485": "Lanas 3 [conso]",
+    "54486": "Lanas 4",
+    "54487": "Lanas 4 [conso]",
+    "54494": "Lanas 5",
+    "54495": "Lanas 5 [conso]",
+    "54619": "Flins",
+    "54620": "Douai",
+    "54621": "Douai [conso]",
+    "54622": "Flins [conso]",
+    "54623": "Sandouville",
+    "54624": "Sandouville [conso]",
+    "54625": "Maubeuge",
+    "54626": "Maubeuge [conso]",
+    "54642": "Batilly",
+    "54643": "Batilly [conso]",
+    "54936": "St Etienne des Sorts - M8",
+    "54939": "St Etienne des Sorts - M8 [conso]",
+    "113849": "Lavansol M13",
+    "113850": "Toul 3.1[conso]C",
+    "113865": "Toul 3.2[conso]C",
+    "113867": "Toul 3.1",
+    "113869": "Toul 3.2",
+    "130525": "GenPro325e 01",
+    "131346": "GenPro325e 01",
+    "131347": "GenPro325e 02",
+    "131629": "Château Solar VI",
+    "131630": "Lavansol M12 (injection) RTE0000517025",
+    "131631": "Lavansol M16 (soutirage) RTE0000517027",
+    "134528": "Lavansol V (clône) SC00009881",
+    "134529": "Lavansol V [soutirage]  (clône) SC00009881C",
+    "134757": "Château Solar VI (pas PRM soutirage)",
+    "134850": "Lavansol M12(soutirage)",
+    "134851": "Lavansol M16(injection)",
+    "136169": "TALLONE",
+    "136242": "TIPOS 23-04-2021",
+    "136939": "Lavansol III (soutirage)",
+    "136960": "Lavansol IV (soutirage)",
+    "136962": "Lavansol VI (soutirage)",
+    "137761": "Lavansol VI (injection)",
+    "137762": "Lavansol IV (injection)",
+    "137763": "Lavansol III (injection)",
+    "139795": "Sandouville -",
+    "139796": "Sandouville ??",
+    "139800": "Batilly (copie)",
+    "139828": "Batilly [conso 2]",
+    "139829": "Douai [conso 2]",
+    "139830": "Flins [conso 2]",
+    "139831": "Maubeuge [conso 2]",
+    "139832": "Sandouville [conso 2]",
+    "141333": "Revest-du-Bion (copie)",
+    "141334": "Revest-du-Bion [conso]  (copie)",
+    "156364": "Barisol",
+    "156524": "Barisol (conso)",
+    "157010": "Soleol IV (injection)",
+    "159084": "Soleol IV (soutirage)",
+    "183723": "CORSOLAR II SC00009747 (2)  ?",
+    "183745": "CORSOLAR II SC00009747 (injection)",
+    "183746": "CORSOLAR II SC00009747 [soutirage]",
+    "184855": "TEST espace élec AFA"
+}
+
+# Création d'une liste de tuples pour le selectbox (tri alphabétique)
+LISTE_PARCS = sorted(
+    [(nom, meter_id) for meter_id, nom in PARCS.items()], 
+    key=lambda x: x[0]
+)
+
+# -------------------------------------------
 #      IDENTIFIANTS AUTORISÉS (exemple)
 # -------------------------------------------
 VALID_USERS = {
@@ -59,15 +202,11 @@ def recuperer_donnees(meter_id, start_date, end_date, type_puissance, headers):
 
         data_values = json_data["data"]["values"]
         if not data_values:
-            # Aucun enregistrement
             return pd.DataFrame([])
 
         df = pd.DataFrame(data_values)
-        # Convertit la date (et supprime le fuseau)
         df["date"] = pd.to_datetime(df["date"]).dt.tz_localize(None).dt.floor("D")
-        # Convertit la puissance en kWh (pas de mesure = 5 minutes)
         df[f"{type_puissance}_kWh"] = df["value"] * (5/60)
-        # Agrège par jour
         grouped = df.groupby("date")[f"{type_puissance}_kWh"].sum().reset_index()
 
         return grouped
@@ -86,10 +225,9 @@ def login_page():
     password = st.text_input("Mot de passe", type="password")
 
     if st.button("Se connecter"):
-        # Vérification des identifiants
         if username in VALID_USERS and VALID_USERS[username] == password:
             st.session_state["authenticated"] = True
-            st.rerun()  # Recharge la page pour afficher l'app
+            st.rerun()
         else:
             st.error("Identifiants invalides")
 
@@ -97,21 +235,29 @@ def login_page():
 #  FONCTION : CONTENU PRINCIPAL DE L'APP
 # -------------------------------------------
 def app_content():
-    # TITRE & HEADER
     st.title("🌞 Appli Eveler - Suivi de Production ⚡")
     st.markdown(
         "Bienvenue dans l'interface de suivi des productions solaires 🏭. "
-        "Veuillez renseigner les champs ci-dessous pour obtenir vos données."
+        "Veuillez sélectionner un parc dans la liste déroulante."
     )
 
-    # Bouton déconnexion 
     if st.button("Se déconnecter"):
         st.session_state["authenticated"] = False
         st.rerun()
 
-    # FORMULAIRE D'ENTRÉE
     with st.form(key="form_recherche"):
-        meter_id = st.text_input("🏷️ ID de la centrale", value="")
+        # Sélection du parc avec menu déroulant
+        selected_parc = st.selectbox(
+            "🏷️ Sélectionnez le parc",
+            options=LISTE_PARCS,
+            format_func=lambda x: x[0],
+            help="Sélectionnez un parc dans la liste déroulante"
+        )
+        
+        # Récupération des informations
+        nom_parc, meter_id = selected_parc
+        st.markdown(f"**Meter ID associé :** `{meter_id}`")
+
         col1, col2 = st.columns(2)
         with col1:
             start_date = st.date_input("📅 Date de début", value=date.today() - timedelta(days=7))
@@ -121,17 +267,14 @@ def app_content():
         submit_button = st.form_submit_button("🔎 Rechercher")
 
     if submit_button:
-        # 1) Authentification
         headers = authentifier()
         if not headers:
             st.stop()
 
-        # 2) Récupération des 3 types de données
         active_df = recuperer_donnees(meter_id, start_date, end_date, "power:active", headers)
         qplus_df = recuperer_donnees(meter_id, start_date, end_date, "power:reactive+", headers)
         qminus_df = recuperer_donnees(meter_id, start_date, end_date, "power:reactive-", headers)
 
-        # 3) Fusion
         final_df = (
             active_df
             .merge(qplus_df, on="date", how="outer")
@@ -145,20 +288,18 @@ def app_content():
             "Reactive Q- (kVArh)"
         ]
 
-        # 4) Vérification
         if final_df.empty:
             st.warning("😕 Aucune donnée trouvée sur cette période.")
             st.stop()
 
-        # 5) Affichage du tableau
-        st.success(f"✅ Résultats pour la centrale : **{meter_id}**")
-        # On crée une copie pour l'affichage (dates formatées)
+        st.success(f"✅ Résultats pour : **{nom_parc}**")
         df_affiche = final_df.copy()
         df_affiche["Date"] = pd.to_datetime(df_affiche["Date"]).dt.strftime("%d/%m/%Y")
 
-        st.dataframe(df_affiche)
+        st.dataframe(df_affiche)   
 
-        # 6) Calcul et affichage des statistiques
+        # ... (le reste du code statistiques et export reste inchangé)
+         # 6) Calcul et affichage des statistiques
         st.markdown("---")
         st.subheader("📊 Statistiques")
 
@@ -226,24 +367,18 @@ def app_content():
                 ⚠️ Erreur d'export : 
                 Une erreur est survenue lors de la génération du fichier.
                 Détails techniques : {str(e)}
-            """)
+            """) 
 # -------------------------------------------
 #        FONCTION PRINCIPALE STREAMLIT
 # -------------------------------------------
 def main():
-    # Initialiser la clé "authenticated" dans session_state
     if "authenticated" not in st.session_state:
         st.session_state["authenticated"] = False
 
-    # Si l'utilisateur n'est pas encore authentifié, afficher la page de login
     if not st.session_state["authenticated"]:
         login_page()
     else:
-        # Sinon, afficher le contenu principal
         app_content()
 
-# -------------------------------------------
-#    LANCEMENT DE L'APP (streamlit run ...)
-# -------------------------------------------
 if __name__ == "__main__":
     main()

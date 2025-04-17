@@ -183,6 +183,9 @@ def authentifier():
 #     FONCTION POUR RÉCUPÉRER LES DONNÉES
 # -------------------------------------------
 def recuperer_donnees(meter_id, start_date, end_date, type_puissance, headers):
+    """
+    Récupère les données du compteur et calcule l'énergie (kWh) avec l'intervalle réel entre mesures.
+    """
     endpoint = f"{URL}/meter/{meter_id}/data/{type_puissance}/{start_date}/{end_date}"
     try:
         response = requests.get(endpoint, headers=headers)
@@ -199,11 +202,34 @@ def recuperer_donnees(meter_id, start_date, end_date, type_puissance, headers):
         if not data_values:
             return pd.DataFrame([])
 
+        # Conversion en DataFrame
         df = pd.DataFrame(data_values)
-        df["date"] = pd.to_datetime(df["date"]).dt.tz_localize(None).dt.floor("D")
-        df[f"{type_puissance}_kWh"] = df["value"] * (5/60)
-        grouped = df.groupby("date")[f"{type_puissance}_kWh"].sum().reset_index()
-
+        
+        # Conversion des dates en datetime sans timezone
+        df["date"] = pd.to_datetime(df["date"]).dt.tz_localize(None)
+        
+        # Méthode améliorée pour calculer l'énergie
+        # 1. Trier par date
+        df = df.sort_values("date")
+        
+        # 2. Calculer l'intervalle entre chaque point de mesure
+        df["next_date"] = df["date"].shift(-1)
+        df["interval_hours"] = (df["next_date"] - df["date"]).dt.total_seconds() / 3600
+        
+        # 3. Gérer le dernier point et limiter les intervalles trop grands
+        df["interval_hours"] = df["interval_hours"].fillna(0)  # Dernier point
+        df.loc[df["interval_hours"] > 1, "interval_hours"] = 5/60  # Max 1 heure, défaut 5 minutes
+        
+        # 4. Calculer l'énergie (puissance × temps)
+        df["energy"] = df["value"] * df["interval_hours"]
+        
+        # 5. Ajouter une colonne pour le jour (pour regroupement)
+        df["jour"] = df["date"].dt.floor("D")
+        
+        # 6. Somme par jour
+        grouped = df.groupby("jour")["energy"].sum().reset_index()
+        grouped.columns = ["date", f"{type_puissance}_kWh"]
+        
         return grouped
     except Exception as e:
         st.error(f"⚠️ Erreur de connexion pour {type_puissance} : {e}")
@@ -214,9 +240,9 @@ def recuperer_donnees(meter_id, start_date, end_date, type_puissance, headers):
 # -------------------------------------------
 def login_page():
     st.title("🔒 Accès réservé")
-    st.write("Veuillez vous authentifier pour accéder à l’application.")
+    st.write("Veuillez vous authentifier pour accéder à l'application.")
 
-    username = st.text_input("Nom d’utilisateur")
+    username = st.text_input("Nom d'utilisateur")
     password = st.text_input("Mot de passe", type="password")
 
     if st.button("Se connecter"):
@@ -249,7 +275,7 @@ def app_content():
             help="Sélectionnez un parc dans la liste déroulante"
         )
         
-        # Récupération des informations
+        # Récupération des informations   
         nom_parc, meter_id = selected_parc
         st.markdown(f"**Meter ID associé :** `{meter_id}`")
 
@@ -261,6 +287,12 @@ def app_content():
 
         submit_button = st.form_submit_button("🔎 Rechercher")
 
+        st.radio(
+            "Mode de calcul",
+            ["Puissances instantanées (recommandé)"],  # Une seule option, donc pas de choix
+            key="mode_calcul_forcé"       # Clé unique pour remplacer le widget existant
+)  
+  
     if submit_button:
         headers = authentifier()
         if not headers:
@@ -288,13 +320,14 @@ def app_content():
             st.stop()
 
         st.success(f"✅ Résultats pour : **{nom_parc}**")
+        st.info("📊 Méthode de calcul: Conversion des puissances en tenant compte de l'intervalle entre mesures")
+        
         df_affiche = final_df.copy()
         df_affiche["Date"] = pd.to_datetime(df_affiche["Date"]).dt.strftime("%d/%m/%Y")
 
         st.dataframe(df_affiche)   
 
-        # ... (le reste du code statistiques et export reste inchangé)
-         # 6) Calcul et affichage des statistiques
+        # 6) Calcul et affichage des statistiques
         st.markdown("---")
         st.subheader("📊 Statistiques")
 
@@ -322,7 +355,6 @@ def app_content():
             c4.write(f"**Date max**: {date_max}")
 
         # 7) Téléchargement Excel
-                # 7) Téléchargement Excel
         st.markdown("---")
         st.markdown("### 📥 Export des données")
         

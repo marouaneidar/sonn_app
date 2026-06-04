@@ -140,7 +140,30 @@ PARCS = {
     "183723": "CORSOLAR II SC00009747 (2)  ?",
     "183745": "CORSOLAR II SC00009747 (injection)",
     "183746": "CORSOLAR II SC00009747 [soutirage]",
-    "184855": "TEST espace élec AFA"
+    "184855": "TEST espace élec AFA",
+    "208011": "LAVANSOL M19 [injection]",
+    "208012": "LAVANSOL M19 [soutirage]",
+    "208014": "LAVANSOL M21 [injection]",
+    "208015": "LAVANSOL M21 [soutirage]",
+    "131629": "Château Solar VI [injection]",
+    "134757": "Château Solar VI [soutirage]",
+    "199360": "Auriac [injection]",
+    "202015": "Auriac [soutirage]",
+    "209183": "Provensol 1 [injection]",
+    "209191": "Provensol 1 [soutirage]",
+    "262890": "Conlorbe Est [injection]",
+    "262908": "Conlorbe Est [soutirage]",
+    "262900": "Cosme [injection]",
+    "262909": "Cosme [soutirage]",
+    "262901": "Hostens [injection]",
+    "262910": "Hostens [soutirage]",
+    "262904": "Labraise Nord [injection]",
+    "262903": "Labraise Nord [soutirage]",
+    "262906": "Las Canes [injection]",
+    "262905": "Las Canes [soutirage]",
+    "262899": "Lestage [injection]",
+    "262912": "Lestage [soutirage]"
+    
 }
 
 # Création d'une liste de tuples pour le selectbox (tri alphabétique)

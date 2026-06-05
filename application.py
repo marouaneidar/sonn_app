@@ -162,8 +162,9 @@ PARCS = {
     "262906": "Las Canes [injection]",
     "262905": "Las Canes [soutirage]",
     "262899": "Lestage [injection]",
-    "262912": "Lestage [soutirage]"
-    
+    "262912": "Lestage [soutirage]",
+    "39658": "Lavansol M1 (injection)",
+    "40015": "Lavansol M1 (soutirage)"
 }
 
 # Création d'une liste de tuples pour le selectbox (tri alphabétique)

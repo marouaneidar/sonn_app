@@ -1,17 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-PROTOTYPE v2 - Page RECAP tan phi (toutes les centrales)
-========================================================
-A placer dans le MEME dossier que ton application.py.
-Lancement :  streamlit run recap_tanphi.py
 
-Corrections par rapport a la v1 :
-  - fix de l'affichage colore (pandas recent : .map au lieu de .applymap)
-  - les erreurs 404 (compteur sans cette donnee) ne bloquent plus et
-    n'affichent plus de gros message rouge : on compte juste les manques.
-  - on n'utilise plus recuperer_donnees() (qui criait a chaque 404) :
-    on fait l'appel ici, en silencieux, avec le MEME calcul d'energie.
-"""
 
 import streamlit as st
 import pandas as pd
@@ -20,18 +8,14 @@ import calendar
 import io
 import requests
 
-# On reprend la config et les utilitaires de TON appli
+
 from application import PARCS, authentifier, URL
 
-# =====================================================================
-#  BANDEAUX tan phi PAR CENTRALE   ->   A REMPLIR avec la liste de Mickael
-# =====================================================================
+
 DEFAULT_BAND = (0.0, 0.1)
 
 BANDEAUX = {
-    # Exemples a confirmer avec Mickael :
-    # "131629": (0.25, 0.35),   # Chateau Solar VI [injection]
-    # "134757": (0.25, 0.35),   # Chateau Solar VI [soutirage]
+    
 }
 
 
@@ -39,16 +23,9 @@ def bande_de(meter_id):
     return BANDEAUX.get(str(meter_id), DEFAULT_BAND)
 
 
-# =====================================================================
-#  RECUPERATION (silencieuse) + calcul d'energie identique a ton appli
-# =====================================================================
+
 def cumul_mois(meter_id, debut, fin, type_p, headers):
-    """
-    Renvoie (cumul_kWh, ok) pour un compteur / un type sur la periode.
-    ok = False si 404 ou erreur (on n'affiche pas d'alerte rouge).
-    Calcul d'energie identique a recuperer_donnees() : intervalle reel
-    entre mesures, plafonne, puis somme.
-    """
+    
     endpoint = f"{URL}/meter/{meter_id}/data/{type_p}/{debut}/{fin}"
     try:
         resp = requests.get(endpoint, headers=headers, timeout=30)
